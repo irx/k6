@@ -268,6 +268,14 @@
   revision = "8ff2fc3824fcb533795f9a2f233275f0bb18d6c5"
 
 [[projects]]
+  digest = "1:19557f837d82bac7212d6c6481645fac975d2f68ef55f15f9651ffa6fa00e621"
+  name = "github.com/josharian/intern"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "8e6ff32b3e7c0b018c43953085fe2ac330fe9acd"
+  version = "v1.0.0"
+
+[[projects]]
   branch = "master"
   digest = "1:9a2761d838e0576046f6f9523df4de34d40536c9907eded54fa304bd478b363f"
   name = "github.com/julienschmidt/httprouter"
@@ -339,6 +347,19 @@
   pruneopts = "NUT"
   revision = "57409ada9da0f2afad6664c49502f8c50fbd8476"
   version = "0.2.3"
+
+[[projects]]
+  branch = "master"
+  digest = "1:45cc04d962ae51de80a2e806df2fb28e7e748e6820f7db077148273e64b89f08"
+  name = "github.com/mailru/easyjson"
+  packages = [
+    ".",
+    "buffer",
+    "jlexer",
+    "jwriter",
+  ]
+  pruneopts = "NUT"
+  revision = "5c65c6fc0ee649970ae2aeff20dc0bb6a24aff6b"
 
 [[projects]]
   branch = "master"
@@ -694,6 +715,9 @@
     "github.com/kelseyhightower/envconfig",
     "github.com/klauspost/compress/zstd",
     "github.com/kubernetes/helm/pkg/strvals",
+    "github.com/mailru/easyjson",
+    "github.com/mailru/easyjson/jlexer",
+    "github.com/mailru/easyjson/jwriter",
     "github.com/manyminds/api2go",
     "github.com/manyminds/api2go/jsonapi",
     "github.com/mattn/go-colorable",

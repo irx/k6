@@ -13,6 +13,10 @@
 
 [[constraint]]
   branch = "master"
+  name = "github.com/mailru/easyjson"
+
+[[constraint]]
+  branch = "master"
   name = "github.com/manyminds/api2go"
 
 [[constraint]]

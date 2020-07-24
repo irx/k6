@@ -24,7 +24,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"context"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"mime/multipart"
@@ -32,6 +31,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/mailru/easyjson"
 	"github.com/pkg/errors"
 
 	"github.com/loadimpact/k6/lib"
@@ -92,12 +92,13 @@ func (c *Client) CreateTestRun(testRun *TestRun) (*CreateTestRunResponse, error)
 	return &ctrr, nil
 }
 
-func (c *Client) PushMetric(referenceID string, noCompress bool, samples []*Sample) error {
+// PushMetric pushes the provided metric samples for the given referenceID
+func (c *Client) PushMetric(referenceID string, noCompress bool, s []*Sample) error {
 	start := time.Now()
 	url := fmt.Sprintf("%s/metrics/%s", c.baseURL, referenceID)
 
 	jsonStart := time.Now()
-	b, err := json.Marshal(&samples)
+	b, err := easyjson.Marshal(samples(s))
 	if err != nil {
 		return err
 	}
@@ -109,7 +110,7 @@ func (c *Client) PushMetric(referenceID string, noCompress bool, samples []*Samp
 		return err
 	}
 
-	req.Header.Set("X-Payload-Sample-Count", strconv.Itoa(len(samples)))
+	req.Header.Set("X-Payload-Sample-Count", strconv.Itoa(len(s)))
 	var additionalFields logrus.Fields
 
 	if !noCompress {
@@ -149,7 +150,7 @@ func (c *Client) PushMetric(referenceID string, noCompress bool, samples []*Samp
 	logrus.WithFields(logrus.Fields{
 		"t":         time.Since(start),
 		"json_t":    jsonTime,
-		"part_size": len(samples),
+		"part_size": len(s),
 	}).WithFields(additionalFields).Debug("Pushed part to cloud")
 
 	return err
