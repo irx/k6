@@ -115,12 +115,13 @@ func (t *transport) measureAndEmitMetrics(unfReq *unfinishedRequest) *finishedRe
 			tags["status"] = "0"
 		}
 	} else {
-		cleanURL := URL{u: unfReq.request.URL, URL: unfReq.request.URL.String()}.Clean()
 		if enabledTags.Has(stats.TagURL) {
+			cleanURL := URL{u: unfReq.request.URL, URL: unfReq.request.URL.String()}.Clean()
 			tags["url"] = cleanURL
 		}
 
 		if _, ok := tags["name"]; !ok && enabledTags.Has(stats.TagName) {
+			cleanURL := URL{u: unfReq.request.URL, URL: unfReq.request.URL.String()}.Clean()
 			tags["name"] = cleanURL
 		}
 
