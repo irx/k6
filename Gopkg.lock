@@ -96,18 +96,21 @@
   version = "v1.1.6"
 
 [[projects]]
-  branch = "master"
-  digest = "1:263512bb603cd6b834354bbafaa32fd03b3efed71ddfcd1997c2e4a1655434e4"
+  branch = "es6"
+  digest = "1:8a85d0b008a1d148ec97316e8a7f6d7e9903d93f0a468b657f95de3beef8de39"
   name = "github.com/dop251/goja"
   packages = [
     ".",
     "ast",
     "file",
+    "ftoa",
+    "ftoa/internal/fast",
     "parser",
     "token",
+    "unistring",
   ]
   pruneopts = "NUT"
-  revision = "1f8a2ffe986ff105e41a12cc8b82857c3e1c2d44"
+  revision = "f19759604c88e17c96c01c568e10ee1e5d0912ad"
 
 [[projects]]
   branch = "master"
