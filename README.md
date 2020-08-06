@@ -27,6 +27,9 @@
 
 This is how load testing should look in the 21st century.
 
+This fork features a patch by [caseylucas](https://github.com/caseylucas) that allows sending binary data in http request without having goja panic.
+See this [issue](https://github.com/loadimpact/k6/issues/1020#issuecomment-558268847)
+
 <p align="center">
   <img width="600" src="./assets/k6-demo.gif">
 </p>

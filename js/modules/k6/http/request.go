@@ -29,6 +29,7 @@ import (
 	"net/textproto"
 	"net/url"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
@@ -97,7 +98,24 @@ func (h *HTTP) Request(ctx context.Context, method string, url goja.Value, args 
 	var params goja.Value
 
 	if len(args) > 0 {
-		body = args[0].Export()
+		// check to see if body param looks like a Uint8Array and if so, copy bytes out of it into a []byte.
+		if obj, ok := args[0].(*goja.Object); ok {
+			bytesPerElementVal := obj.Get("BYTES_PER_ELEMENT")
+			byteLengthVal := obj.Get("byteLength")
+			if bytesPerElementVal != nil &&
+				bytesPerElementVal.ToInteger() == 1 &&
+				byteLengthVal != nil {
+				byteLength := byteLengthVal.ToInteger()
+				byteBuf := make([]byte, byteLength)
+				for i := int64(0); i < byteLength; i++ {
+					byteBuf[i] = (byte)(obj.Get(strconv.FormatInt(i, 10)).ToInteger() & 0xff)
+				}
+				body = byteBuf
+			}
+		}
+		if body == nil {
+			body = args[0].Export()
+		}
 	}
 	if len(args) > 1 {
 		params = args[1]
